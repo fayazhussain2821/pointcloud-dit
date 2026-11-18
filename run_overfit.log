@@ -1,0 +1,71 @@
+OK  points lie on the outline of each shape (square with flat sides)
+OK  dataset: (300, 256, 2), 3 shapes balanced, coordinates within [-1.5, 1.5]
+OK  Chamfer distance: 0 for the same cloud in any order, symmetric, chunks agree
+OK  1-NNA: real vs real 0.47 (near 0.5 is good), noise vs real 1.00
+OK  the model's output has the same shape as its input, and is zero before training (adaLN-Zero)
+OK  shuffling the input points shuffles the output the same way (order does not matter)
+OK  the output depends on t
+OK  mixing (t=0 noise, t=1 cloud), and x, eps and v all convert to the correct velocity
+OK  Euler and Heun sampling with a perfect velocity reach the cloud
+All checks passed.
+Saved 24 example clouds to /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/dataset_examples.png
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_x
+Training clouds: (3, 256, 2)   overfitting
+Model: 32.46M parameters   pred=x   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[x] step      1/3000  loss 5.8908  1735 ms/step
+[x] step    500/3000  loss 0.6703  188 ms/step
+  [checkpoint 500] nearest CD: EMA 0.00179  raw 0.00177   covered (EMA): 3/3
+[x] step   1000/3000  loss 0.5788  197 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.00055  raw 0.00103   covered (EMA): 3/3
+[x] step   1500/3000  loss 0.5724  202 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.00045  raw 0.00091   covered (EMA): 3/3
+[x] step   2000/3000  loss 0.5661  203 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.00035  raw 0.00047   covered (EMA): 3/3
+[x] step   2500/3000  loss 0.5649  204 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.00034  raw 0.00080   covered (EMA): 3/3
+[x] step   3000/3000  loss 0.5626  204 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.00033  raw 0.00065   covered (EMA): 3/3
+Done in 10.4 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_x
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_eps
+Training clouds: (3, 256, 2)   overfitting
+Model: 32.46M parameters   pred=eps   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[eps] step      1/3000  loss 40.9965  407 ms/step
+[eps] step    500/3000  loss 1.2262  191 ms/step
+  [checkpoint 500] nearest CD: EMA 0.14842  raw 0.06443   covered (EMA): 3/3
+[eps] step   1000/3000  loss 0.5999  202 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.01907  raw 0.01955   covered (EMA): 3/3
+[eps] step   1500/3000  loss 0.5918  204 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.01151  raw 0.01358   covered (EMA): 3/3
+[eps] step   2000/3000  loss 0.5835  205 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.00623  raw 0.00582   covered (EMA): 3/3
+[eps] step   2500/3000  loss 0.5893  206 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.00539  raw 0.00705   covered (EMA): 3/3
+[eps] step   3000/3000  loss 0.5763  207 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.00478  raw 0.00575   covered (EMA): 3/3
+Done in 10.5 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_eps
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_v
+Training clouds: (3, 256, 2)   overfitting
+Model: 32.46M parameters   pred=v   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[v] step      1/3000  loss 1.2501  388 ms/step
+[v] step    500/3000  loss 0.5839  191 ms/step
+  [checkpoint 500] nearest CD: EMA 0.00239  raw 0.00409   covered (EMA): 3/3
+[v] step   1000/3000  loss 0.5654  199 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.00166  raw 0.00301   covered (EMA): 3/3
+[v] step   1500/3000  loss 0.5634  201 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.00136  raw 0.00196   covered (EMA): 3/3
+[v] step   2000/3000  loss 0.5596  204 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.00111  raw 0.00113   covered (EMA): 3/3
+[v] step   2500/3000  loss 0.5599  205 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.00094  raw 0.00199   covered (EMA): 3/3
+[v] step   3000/3000  loss 0.5593  205 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.00090  raw 0.00097   covered (EMA): 3/3
+Done in 10.4 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/overfit_v
+EMA scores per checkpoint:
+   step                         overfit_x                       overfit_eps                         overfit_v
+    500    nearest_cd 0.001793  covered 3      nearest_cd 0.1484  covered 3     nearest_cd 0.00239  covered 3
+   1000   nearest_cd 0.0005507  covered 3     nearest_cd 0.01907  covered 3    nearest_cd 0.001657  covered 3
+   1500   nearest_cd 0.0004465  covered 3     nearest_cd 0.01151  covered 3    nearest_cd 0.001361  covered 3
+   2000   nearest_cd 0.0003464  covered 3    nearest_cd 0.006231  covered 3    nearest_cd 0.001113  covered 3
+   2500   nearest_cd 0.0003368  covered 3    nearest_cd 0.005391  covered 3   nearest_cd 0.0009443  covered 3
+   3000   nearest_cd 0.0003253  covered 3    nearest_cd 0.004785  covered 3   nearest_cd 0.0009039  covered 3
+Charts saved in runs/overfit_comparison

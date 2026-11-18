@@ -1,0 +1,21 @@
+
+runs/x/ckpt.pt (step 20000, pred x)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.521   0.01902   0.56     0.01713   triangle 83  square 105  circle 111
+ euler/200   0.498   0.01836   0.57     0.01742   triangle 73  square 103  circle 124
+   heun/50   0.494   0.01837   0.58     0.01757   triangle 71  square 101  circle 128
+  heun/200   0.499   0.01838   0.58     0.01762   triangle 70  square 101  circle 129
+
+runs/eps/ckpt.pt (step 20000, pred eps)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.542   0.02043   0.54     0.01901   triangle 106  square 101  circle 93
+ euler/200   0.515   0.01953   0.59     0.02007   triangle 94  square 97  circle 109
+   heun/50   0.521   0.01938   0.59     0.02013   triangle 92  square 97  circle 111
+  heun/200   0.515   0.01944   0.58     0.02037   triangle 91  square 97  circle 112
+
+runs/v/ckpt.pt (step 20000, pred v)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.506   0.01875   0.56     0.01745   triangle 89  square 100  circle 111
+ euler/200   0.489   0.01812   0.58     0.01773   triangle 76  square 100  circle 123
+   heun/50   0.482   0.01808   0.59     0.01777   triangle 74  square 103  circle 124
+  heun/200   0.481   0.01815   0.59     0.01788   triangle 75  square 101  circle 123

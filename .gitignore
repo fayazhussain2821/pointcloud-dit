@@ -1,0 +1,16 @@
+# Checkpoints: hundreds of MB each, over GitHub's 100 MB limit
+ckpt.pt
+
+# Python environments
+.venv*/
+venv*/
+
+# Clutter
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+nohup.out
+
+# Never commit VPN configs
+*.conf

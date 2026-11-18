@@ -1,0 +1,19 @@
+Real vs real: 10 fresh sets of 300 clouds against the reference set
+  seed   1-NNA       MMD    COV  nearest CD  labels right   shapes
+  2000   0.478   0.01691   0.62     0.01633         0.710   triangle 86  square 92  circle 122
+  2001   0.480   0.01773   0.58     0.01731         0.723   triangle 82  square 97  circle 121
+  2002   0.490   0.01754   0.59     0.01729         0.743   triangle 85  square 93  circle 122
+  2003   0.463   0.01676   0.59     0.01705         0.690   triangle 86  square 95  circle 119
+  2004   0.440   0.01717   0.59     0.01673         0.730   triangle 94  square 79  circle 127
+  2005   0.450   0.01622   0.62     0.01640         0.727   triangle 90  square 81  circle 129
+  2006   0.478   0.01736   0.58     0.01760         0.663   triangle 77  square 101  circle 122
+  2007   0.468   0.01705   0.62     0.01700         0.700   triangle 85  square 92  circle 123
+  2008   0.483   0.01721   0.55     0.01726         0.687   triangle 84  square 89  circle 127
+  2009   0.497   0.01792   0.60     0.01717         0.727   triangle 79  square 97  circle 124
+
+Average +- spread (standard deviation) over the repeats:
+  1-NNA         0.473 +- 0.018
+  MMD           0.01719 +- 0.00049
+  COV           0.594 +- 0.022
+  nearest CD    0.01701 +- 0.00041
+  labels right  0.710 +- 0.025

@@ -27,6 +27,7 @@ import torch
 from dit import PointDiT
 from flow_matching import flow_matching_loss, generate
 from metrics import generation_scores, overfit_scores
+from ptv3 import PointTransformerV3
 from shapes import SHAPES, make_dataset, plot_clouds
 
 HERE = Path(__file__).resolve().parent
@@ -43,7 +44,9 @@ def get_args(argv=None):
     p.add_argument("--scale_min", type=float, default=0.5, help="set scale_min = scale_max = 1 to turn scaling off")
     p.add_argument("--scale_max", type=float, default=1.0)
     p.add_argument("--shift", type=float, default=0.5, help="largest shift along x and y (0 = off)")
-    # Model (default: DiT-S size, 12 blocks, width 384, 6 heads)
+    # Model (DiT default: DiT-S size, 12 blocks, width 384, 6 heads; PTv3 settings are in ptv3.py)
+    p.add_argument("--model", default="dit", choices=["dit", "ptv3"])
+    p.add_argument("--patch_size", type=int, default=64, help="ptv3: points per attention patch")
     p.add_argument("--dim", type=int, default=384)
     p.add_argument("--depth", type=int, default=12)
     p.add_argument("--heads", type=int, default=6)
@@ -65,7 +68,8 @@ def get_args(argv=None):
     p.add_argument("--device", default=None)
     args = p.parse_args(argv)
     if args.out is None:
-        args.out = str(HERE / "runs" / (f"overfit_{args.pred}" if args.overfit else args.pred))
+        name = f"overfit_{args.pred}" if args.overfit else args.pred
+        args.out = str(HERE / "runs" / (name if args.model == "dit" else f"{args.model}_{name}"))
     if args.device is None:
         args.device = "cuda" if torch.cuda.is_available() else "cpu"
     return args
@@ -77,6 +81,9 @@ def data_settings(args):
 
 
 def build_model(args):
+    # Checkpoints saved before PTv3 was added have no "model" setting: they are DiTs.
+    if getattr(args, "model", "dit") == "ptv3":
+        return PointTransformerV3(point_dim=2, patch_size=args.patch_size)
     return PointDiT(point_dim=2, dim=args.dim, depth=args.depth, num_heads=args.heads)
 
 
@@ -109,7 +116,7 @@ def main(argv=None):
     model = build_model(args).to(device)
     ema = copy.deepcopy(model).eval().requires_grad_(False)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    print(f"Model: {sum(p.numel() for p in model.parameters()) / 1e6:.2f}M parameters   pred={args.pred}   "
+    print(f"Model: {args.model}, {sum(p.numel() for p in model.parameters()) / 1e6:.2f}M parameters   pred={args.pred}   "
           f"sampler={args.sampler}/{args.sample_steps}   batch={args.batch_size}   lr={args.lr}   "
           f"ema={args.ema}   grad_clip={args.grad_clip or 'off'}   steps={args.steps}", flush=True)
 

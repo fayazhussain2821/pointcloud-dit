@@ -1,0 +1,74 @@
+Device: cuda
+PASS  Z-order code of cell (3, 5) is 39  
+PASS  Hilbert curve visits every cell once  
+PASS  Hilbert curve only moves to neighbouring cells  
+PASS  Each of the 4 curves sorts every point exactly once  
+PASS  undo reverses take  
+Model: 32.54M parameters
+PASS  Output has one 2D vector per point  (8, 256, 2)
+PASS  Output starts at zero (adaLN-Zero)  
+PASS  Every parameter receives a gradient  
+PASS  Shuffling the input points shuffles the output  largest difference 0.000000
+PASS  The time t changes the output  largest change 0.692995
+
+All checks passed.
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_x
+Training clouds: (3, 256, 2)   overfitting
+Model: ptv3, 32.54M parameters   pred=x   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[x] step      1/3000  loss 5.8908  352 ms/step
+[x] step    500/3000  loss 0.8133  75 ms/step
+  [checkpoint 500] nearest CD: EMA 0.00236  raw 0.00244   covered (EMA): 3/3
+[x] step   1000/3000  loss 0.5840  83 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.00097  raw 0.00130   covered (EMA): 3/3
+[x] step   1500/3000  loss 0.5771  88 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.00072  raw 0.00102   covered (EMA): 3/3
+[x] step   2000/3000  loss 0.5710  89 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.00058  raw 0.00080   covered (EMA): 3/3
+[x] step   2500/3000  loss 0.5695  90 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.00059  raw 0.00086   covered (EMA): 3/3
+[x] step   3000/3000  loss 0.5684  91 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.00051  raw 0.00061   covered (EMA): 3/3
+Done in 4.7 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_x
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_eps
+Training clouds: (3, 256, 2)   overfitting
+Model: ptv3, 32.54M parameters   pred=eps   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[eps] step      1/3000  loss 40.9965  357 ms/step
+[eps] step    500/3000  loss 2.3127  77 ms/step
+  [checkpoint 500] nearest CD: EMA 1.63264  raw 0.98286   covered (EMA): 3/3
+[eps] step   1000/3000  loss 0.6587  84 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.48711  raw 0.49186   covered (EMA): 3/3
+[eps] step   1500/3000  loss 0.6151  87 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.25998  raw 0.19160   covered (EMA): 3/3
+[eps] step   2000/3000  loss 0.5987  89 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.20961  raw 0.19629   covered (EMA): 3/3
+[eps] step   2500/3000  loss 0.5881  90 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.10295  raw 0.07556   covered (EMA): 3/3
+[eps] step   3000/3000  loss 0.5806  91 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.05782  raw 0.06380   covered (EMA): 3/3
+Done in 4.7 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_eps
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_v
+Training clouds: (3, 256, 2)   overfitting
+Model: ptv3, 32.54M parameters   pred=v   sampler=euler/50   batch=64   lr=0.0003   ema=0.99   grad_clip=1.0   steps=3000
+[v] step      1/3000  loss 1.2501  360 ms/step
+[v] step    500/3000  loss 0.6193  78 ms/step
+  [checkpoint 500] nearest CD: EMA 0.00406  raw 0.00800   covered (EMA): 3/3
+[v] step   1000/3000  loss 0.5722  86 ms/step
+  [checkpoint 1000] nearest CD: EMA 0.00182  raw 0.00647   covered (EMA): 3/3
+[v] step   1500/3000  loss 0.5674  91 ms/step
+  [checkpoint 1500] nearest CD: EMA 0.00128  raw 0.00178   covered (EMA): 3/3
+[v] step   2000/3000  loss 0.5629  93 ms/step
+  [checkpoint 2000] nearest CD: EMA 0.00105  raw 0.00127   covered (EMA): 3/3
+[v] step   2500/3000  loss 0.5629  94 ms/step
+  [checkpoint 2500] nearest CD: EMA 0.00090  raw 0.00199   covered (EMA): 3/3
+[v] step   3000/3000  loss 0.5618  95 ms/step
+  [checkpoint 3000] nearest CD: EMA 0.00081  raw 0.00101   covered (EMA): 3/3
+Done in 4.9 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_overfit_v
+EMA scores per checkpoint:
+   step                    ptv3_overfit_x                  ptv3_overfit_eps                    ptv3_overfit_v
+    500    nearest_cd 0.002356  covered 3       nearest_cd 1.633  covered 3    nearest_cd 0.004056  covered 3
+   1000   nearest_cd 0.0009712  covered 3      nearest_cd 0.4871  covered 3    nearest_cd 0.001824  covered 3
+   1500   nearest_cd 0.0007167  covered 3        nearest_cd 0.26  covered 3    nearest_cd 0.001275  covered 3
+   2000   nearest_cd 0.0005752  covered 3      nearest_cd 0.2096  covered 3     nearest_cd 0.00105  covered 3
+   2500    nearest_cd 0.000587  covered 3      nearest_cd 0.1029  covered 3   nearest_cd 0.0008964  covered 3
+   3000   nearest_cd 0.0005051  covered 3     nearest_cd 0.05782  covered 3   nearest_cd 0.0008133  covered 3
+Charts saved in runs/ptv3_overfit_comparison

@@ -1,0 +1,15 @@
+Fitting 10 sets of 300 real clouds...
+Generating and fitting pred=x (heun/200, 3 seeds)...
+Generating and fitting pred=eps (heun/200, 3 seeds)...
+Generating and fitting pred=v (heun/200, 3 seeds)...
+
+Real clouds named as the correct shape: 100.0 %
+
+                       triangle % square % circle % distance off outline % covered % clean % size
+real (the limit)             33.3     33.3     33.3  0.00031          0.00     99.67    99.0 0.751
+real chance spread            0.0      0.0      0.0  0.00001          0.00      0.02     0.7 0.007
+x (heun/200)                 27.3     33.7     39.0  0.00758          5.22     99.46    13.0 0.753
+eps (heun/200)               30.3     36.7     33.0  0.01081         10.23     98.77     6.8 0.748
+v (heun/200)                 30.6     33.1     36.3  0.00684          3.28     99.56    30.9 0.750
+
+Saved runs/ptv3_shape_fit.json

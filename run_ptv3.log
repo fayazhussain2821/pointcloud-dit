@@ -1,0 +1,228 @@
+Device: cuda
+PASS  Z-order code of cell (3, 5) is 39  
+PASS  Hilbert curve visits every cell once  
+PASS  Hilbert curve only moves to neighbouring cells  
+PASS  Each of the 4 curves sorts every point exactly once  
+PASS  undo reverses take  
+Model: 32.54M parameters
+PASS  Output has one 2D vector per point  (8, 256, 2)
+PASS  Output starts at zero (adaLN-Zero)  
+PASS  Every parameter receives a gradient  
+PASS  Shuffling the input points shuffles the output  largest difference 0.000000
+PASS  The time t changes the output  largest change 0.692995
+
+All checks passed.
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_x
+Training clouds: (10000, 256, 2)   held-out reference clouds: 300
+Model: ptv3, 32.54M parameters   pred=x   sampler=euler/50   batch=64   lr=0.0001   ema=0.999   grad_clip=1.0   steps=20000
+[x] step      1/20000  loss 6.0098  345 ms/step
+[x] step    500/20000  loss 1.3568  76 ms/step
+[x] step   1000/20000  loss 0.7062  76 ms/step
+[x] step   1500/20000  loss 0.6841  76 ms/step
+[x] step   2000/20000  loss 0.6683  76 ms/step
+  [checkpoint 2000] EMA: 1-NNA 0.835  MMD 0.05317  COV 0.20  shapes {'triangle': 219, 'square': 48, 'circle': 33}   raw: 1-NNA 0.732  MMD 0.02637
+[x] step   2500/20000  loss 0.6599  84 ms/step
+[x] step   3000/20000  loss 0.6554  83 ms/step
+[x] step   3500/20000  loss 0.6511  82 ms/step
+[x] step   4000/20000  loss 0.6457  81 ms/step
+  [checkpoint 4000] EMA: 1-NNA 0.603  MMD 0.01711  COV 0.49  shapes {'triangle': 35, 'square': 107, 'circle': 158}   raw: 1-NNA 0.622  MMD 0.01970
+[x] step   4500/20000  loss 0.6450  85 ms/step
+[x] step   5000/20000  loss 0.6439  84 ms/step
+[x] step   5500/20000  loss 0.6384  84 ms/step
+[x] step   6000/20000  loss 0.6381  83 ms/step
+  [checkpoint 6000] EMA: 1-NNA 0.545  MMD 0.01682  COV 0.52  shapes {'triangle': 45, 'square': 123, 'circle': 132}   raw: 1-NNA 0.543  MMD 0.01763
+[x] step   6500/20000  loss 0.6379  86 ms/step
+[x] step   7000/20000  loss 0.6399  85 ms/step
+[x] step   7500/20000  loss 0.6378  85 ms/step
+[x] step   8000/20000  loss 0.6378  84 ms/step
+  [checkpoint 8000] EMA: 1-NNA 0.500  MMD 0.01611  COV 0.55  shapes {'triangle': 63, 'square': 106, 'circle': 131}   raw: 1-NNA 0.492  MMD 0.01683
+[x] step   8500/20000  loss 0.6347  86 ms/step
+[x] step   9000/20000  loss 0.6348  85 ms/step
+[x] step   9500/20000  loss 0.6339  85 ms/step
+[x] step  10000/20000  loss 0.6316  85 ms/step
+  [checkpoint 10000] EMA: 1-NNA 0.497  MMD 0.01641  COV 0.58  shapes {'triangle': 69, 'square': 106, 'circle': 125}   raw: 1-NNA 0.518  MMD 0.01771
+[x] step  10500/20000  loss 0.6357  86 ms/step
+[x] step  11000/20000  loss 0.6312  86 ms/step
+[x] step  11500/20000  loss 0.6330  85 ms/step
+[x] step  12000/20000  loss 0.6294  85 ms/step
+  [checkpoint 12000] EMA: 1-NNA 0.483  MMD 0.01665  COV 0.59  shapes {'triangle': 71, 'square': 107, 'circle': 122}   raw: 1-NNA 0.532  MMD 0.01798
+[x] step  12500/20000  loss 0.6327  86 ms/step
+[x] step  13000/20000  loss 0.6286  86 ms/step
+[x] step  13500/20000  loss 0.6297  86 ms/step
+[x] step  14000/20000  loss 0.6300  85 ms/step
+  [checkpoint 14000] EMA: 1-NNA 0.475  MMD 0.01662  COV 0.57  shapes {'triangle': 74, 'square': 108, 'circle': 118}   raw: 1-NNA 0.543  MMD 0.02042
+[x] step  14500/20000  loss 0.6314  86 ms/step
+[x] step  15000/20000  loss 0.6268  86 ms/step
+[x] step  15500/20000  loss 0.6287  86 ms/step
+[x] step  16000/20000  loss 0.6262  85 ms/step
+  [checkpoint 16000] EMA: 1-NNA 0.458  MMD 0.01658  COV 0.59  shapes {'triangle': 77, 'square': 106, 'circle': 117}   raw: 1-NNA 0.500  MMD 0.01763
+[x] step  16500/20000  loss 0.6283  86 ms/step
+[x] step  17000/20000  loss 0.6278  87 ms/step
+[x] step  17500/20000  loss 0.6269  89 ms/step
+[x] step  18000/20000  loss 0.6277  90 ms/step
+  [checkpoint 18000] EMA: 1-NNA 0.435  MMD 0.01641  COV 0.58  shapes {'triangle': 74, 'square': 106, 'circle': 120}   raw: 1-NNA 0.543  MMD 0.01926
+[x] step  18500/20000  loss 0.6274  93 ms/step
+[x] step  19000/20000  loss 0.6269  95 ms/step
+[x] step  19500/20000  loss 0.6248  96 ms/step
+[x] step  20000/20000  loss 0.6262  96 ms/step
+  [checkpoint 20000] EMA: 1-NNA 0.460  MMD 0.01704  COV 0.59  shapes {'triangle': 76, 'square': 112, 'circle': 112}   raw: 1-NNA 0.552  MMD 0.02096
+Done in 32.4 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_x
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_eps
+Training clouds: (10000, 256, 2)   held-out reference clouds: 300
+Model: ptv3, 32.54M parameters   pred=eps   sampler=euler/50   batch=64   lr=0.0001   ema=0.999   grad_clip=1.0   steps=20000
+[eps] step      1/20000  loss 41.0096  393 ms/step
+[eps] step    500/20000  loss 4.0496  115 ms/step
+[eps] step   1000/20000  loss 0.8174  116 ms/step
+[eps] step   1500/20000  loss 0.7618  114 ms/step
+[eps] step   2000/20000  loss 0.7306  114 ms/step
+  [checkpoint 2000] EMA: 1-NNA 1.000  MMD 7.53565  COV 0.04  shapes {'triangle': 0, 'square': 0, 'circle': 300}   raw: 1-NNA 0.900  MMD 0.06588
+[eps] step   2500/20000  loss 0.7118  123 ms/step
+[eps] step   3000/20000  loss 0.6898  121 ms/step
+[eps] step   3500/20000  loss 0.6826  121 ms/step
+[eps] step   4000/20000  loss 0.6740  120 ms/step
+  [checkpoint 4000] EMA: 1-NNA 0.710  MMD 0.02372  COV 0.54  shapes {'triangle': 99, 'square': 100, 'circle': 101}   raw: 1-NNA 0.698  MMD 0.02830
+[eps] step   4500/20000  loss 0.6655  125 ms/step
+[eps] step   5000/20000  loss 0.6656  124 ms/step
+[eps] step   5500/20000  loss 0.6559  123 ms/step
+[eps] step   6000/20000  loss 0.6519  122 ms/step
+  [checkpoint 6000] EMA: 1-NNA 0.555  MMD 0.01885  COV 0.59  shapes {'triangle': 69, 'square': 108, 'circle': 123}   raw: 1-NNA 0.625  MMD 0.02358
+[eps] step   6500/20000  loss 0.6494  125 ms/step
+[eps] step   7000/20000  loss 0.6499  126 ms/step
+[eps] step   7500/20000  loss 0.6478  125 ms/step
+[eps] step   8000/20000  loss 0.6472  124 ms/step
+  [checkpoint 8000] EMA: 1-NNA 0.493  MMD 0.01796  COV 0.57  shapes {'triangle': 74, 'square': 112, 'circle': 114}   raw: 1-NNA 0.643  MMD 0.02815
+[eps] step   8500/20000  loss 0.6453  126 ms/step
+[eps] step   9000/20000  loss 0.6440  125 ms/step
+[eps] step   9500/20000  loss 0.6383  123 ms/step
+[eps] step  10000/20000  loss 0.6365  123 ms/step
+  [checkpoint 10000] EMA: 1-NNA 0.495  MMD 0.01833  COV 0.58  shapes {'triangle': 79, 'square': 108, 'circle': 113}   raw: 1-NNA 0.508  MMD 0.01939
+[eps] step  10500/20000  loss 0.6414  127 ms/step
+[eps] step  11000/20000  loss 0.6361  125 ms/step
+[eps] step  11500/20000  loss 0.6379  125 ms/step
+[eps] step  12000/20000  loss 0.6335  124 ms/step
+  [checkpoint 12000] EMA: 1-NNA 0.513  MMD 0.01852  COV 0.58  shapes {'triangle': 87, 'square': 112, 'circle': 101}   raw: 1-NNA 0.672  MMD 0.02879
+[eps] step  12500/20000  loss 0.6357  126 ms/step
+[eps] step  13000/20000  loss 0.6320  126 ms/step
+[eps] step  13500/20000  loss 0.6336  125 ms/step
+[eps] step  14000/20000  loss 0.6323  125 ms/step
+  [checkpoint 14000] EMA: 1-NNA 0.488  MMD 0.01828  COV 0.60  shapes {'triangle': 88, 'square': 110, 'circle': 102}   raw: 1-NNA 0.565  MMD 0.02193
+[eps] step  14500/20000  loss 0.6353  127 ms/step
+[eps] step  15000/20000  loss 0.6289  125 ms/step
+[eps] step  15500/20000  loss 0.6309  124 ms/step
+[eps] step  16000/20000  loss 0.6282  122 ms/step
+  [checkpoint 16000] EMA: 1-NNA 0.498  MMD 0.01888  COV 0.57  shapes {'triangle': 90, 'square': 110, 'circle': 100}   raw: 1-NNA 0.490  MMD 0.01838
+[eps] step  16500/20000  loss 0.6310  122 ms/step
+[eps] step  17000/20000  loss 0.6294  121 ms/step
+[eps] step  17500/20000  loss 0.6292  119 ms/step
+[eps] step  18000/20000  loss 0.6290  118 ms/step
+  [checkpoint 18000] EMA: 1-NNA 0.498  MMD 0.01855  COV 0.60  shapes {'triangle': 87, 'square': 112, 'circle': 101}   raw: 1-NNA 0.535  MMD 0.01975
+[eps] step  18500/20000  loss 0.6294  118 ms/step
+[eps] step  19000/20000  loss 0.6291  117 ms/step
+[eps] step  19500/20000  loss 0.6265  116 ms/step
+[eps] step  20000/20000  loss 0.6273  115 ms/step
+  [checkpoint 20000] EMA: 1-NNA 0.483  MMD 0.01863  COV 0.57  shapes {'triangle': 88, 'square': 111, 'circle': 101}   raw: 1-NNA 0.658  MMD 0.02632
+Done in 38.7 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_eps
+Device: cuda   output: /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_v
+Training clouds: (10000, 256, 2)   held-out reference clouds: 300
+Model: ptv3, 32.54M parameters   pred=v   sampler=euler/50   batch=64   lr=0.0001   ema=0.999   grad_clip=1.0   steps=20000
+[v] step      1/20000  loss 1.2811  363 ms/step
+[v] step    500/20000  loss 0.7433  78 ms/step
+[v] step   1000/20000  loss 0.6585  77 ms/step
+[v] step   1500/20000  loss 0.6470  77 ms/step
+[v] step   2000/20000  loss 0.6388  77 ms/step
+  [checkpoint 2000] EMA: 1-NNA 0.990  MMD 0.19693  COV 0.03  shapes {'triangle': 0, 'square': 0, 'circle': 300}   raw: 1-NNA 0.600  MMD 0.02053
+[v] step   2500/20000  loss 0.6340  89 ms/step
+[v] step   3000/20000  loss 0.6333  87 ms/step
+[v] step   3500/20000  loss 0.6292  85 ms/step
+[v] step   4000/20000  loss 0.6272  84 ms/step
+  [checkpoint 4000] EMA: 1-NNA 0.553  MMD 0.01883  COV 0.47  shapes {'triangle': 27, 'square': 89, 'circle': 184}   raw: 1-NNA 0.548  MMD 0.02043
+[v] step   4500/20000  loss 0.6270  89 ms/step
+[v] step   5000/20000  loss 0.6276  88 ms/step
+[v] step   5500/20000  loss 0.6232  87 ms/step
+[v] step   6000/20000  loss 0.6249  86 ms/step
+  [checkpoint 6000] EMA: 1-NNA 0.485  MMD 0.01766  COV 0.56  shapes {'triangle': 78, 'square': 110, 'circle': 112}   raw: 1-NNA 0.605  MMD 0.02548
+[v] step   6500/20000  loss 0.6249  88 ms/step
+[v] step   7000/20000  loss 0.6275  88 ms/step
+[v] step   7500/20000  loss 0.6257  87 ms/step
+[v] step   8000/20000  loss 0.6262  86 ms/step
+  [checkpoint 8000] EMA: 1-NNA 0.460  MMD 0.01782  COV 0.58  shapes {'triangle': 91, 'square': 98, 'circle': 111}   raw: 1-NNA 0.500  MMD 0.01927
+[v] step   8500/20000  loss 0.6243  88 ms/step
+[v] step   9000/20000  loss 0.6245  87 ms/step
+[v] step   9500/20000  loss 0.6239  87 ms/step
+[v] step  10000/20000  loss 0.6218  86 ms/step
+  [checkpoint 10000] EMA: 1-NNA 0.477  MMD 0.01787  COV 0.58  shapes {'triangle': 89, 'square': 104, 'circle': 107}   raw: 1-NNA 0.493  MMD 0.01852
+[v] step  10500/20000  loss 0.6267  87 ms/step
+[v] step  11000/20000  loss 0.6228  87 ms/step
+[v] step  11500/20000  loss 0.6244  87 ms/step
+[v] step  12000/20000  loss 0.6212  86 ms/step
+  [checkpoint 12000] EMA: 1-NNA 0.472  MMD 0.01779  COV 0.59  shapes {'triangle': 89, 'square': 109, 'circle': 102}   raw: 1-NNA 0.485  MMD 0.01817
+[v] step  12500/20000  loss 0.6250  87 ms/step
+[v] step  13000/20000  loss 0.6212  87 ms/step
+[v] step  13500/20000  loss 0.6225  87 ms/step
+[v] step  14000/20000  loss 0.6228  86 ms/step
+  [checkpoint 14000] EMA: 1-NNA 0.468  MMD 0.01774  COV 0.57  shapes {'triangle': 91, 'square': 110, 'circle': 99}   raw: 1-NNA 0.535  MMD 0.01968
+[v] step  14500/20000  loss 0.6249  88 ms/step
+[v] step  15000/20000  loss 0.6204  87 ms/step
+[v] step  15500/20000  loss 0.6224  87 ms/step
+[v] step  16000/20000  loss 0.6199  87 ms/step
+  [checkpoint 16000] EMA: 1-NNA 0.458  MMD 0.01729  COV 0.60  shapes {'triangle': 89, 'square': 111, 'circle': 100}   raw: 1-NNA 0.505  MMD 0.01859
+[v] step  16500/20000  loss 0.6221  88 ms/step
+[v] step  17000/20000  loss 0.6216  87 ms/step
+[v] step  17500/20000  loss 0.6209  87 ms/step
+[v] step  18000/20000  loss 0.6219  87 ms/step
+  [checkpoint 18000] EMA: 1-NNA 0.460  MMD 0.01736  COV 0.60  shapes {'triangle': 90, 'square': 105, 'circle': 105}   raw: 1-NNA 0.493  MMD 0.01861
+[v] step  18500/20000  loss 0.6223  88 ms/step
+[v] step  19000/20000  loss 0.6217  87 ms/step
+[v] step  19500/20000  loss 0.6199  87 ms/step
+[v] step  20000/20000  loss 0.6213  87 ms/step
+  [checkpoint 20000] EMA: 1-NNA 0.455  MMD 0.01732  COV 0.59  shapes {'triangle': 92, 'square': 102, 'circle': 106}   raw: 1-NNA 0.627  MMD 0.02620
+Done in 29.3 min. Results in /visinf/projects_students/lab_fsyed/pcg/pointcloud-dit/runs/ptv3_v
+
+runs/ptv3_x/ckpt.pt (step 20000, pred x)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.507   0.01790   0.56     0.01619   triangle 77  square 107  circle 117
+ euler/200   0.484   0.01744   0.58     0.01635   triangle 67  square 104  circle 129
+   heun/50   0.481   0.01749   0.57     0.01646   triangle 65  square 103  circle 132
+  heun/200   0.483   0.01754   0.58     0.01650   triangle 65  square 102  circle 133
+
+runs/ptv3_eps/ckpt.pt (step 20000, pred eps)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.524   0.01916   0.57     0.02905   triangle 91  square 104  circle 105
+ euler/200   0.502   0.01849   0.58     0.03245   triangle 80  square 102  circle 118
+   heun/50   0.499   0.01852   0.57     0.03313   triangle 76  square 100  circle 123
+  heun/200   0.493   0.01855   0.58     0.03374   triangle 75  square 101  circle 124
+
+runs/ptv3_v/ckpt.pt (step 20000, pred v)
+   sampler   1-NNA       MMD    COV  nearest CD   shapes
+  euler/50   0.500   0.01849   0.58     0.01725   triangle 89  square 100  circle 111
+ euler/200   0.483   0.01785   0.58     0.01735   triangle 79  square 98  circle 124
+   heun/50   0.479   0.01788   0.59     0.01739   triangle 77  square 95  circle 128
+  heun/200   0.477   0.01796   0.59     0.01755   triangle 76  square 96  circle 128
+EMA scores per checkpoint:
+   step                            ptv3_x                          ptv3_eps                            ptv3_v
+   2000   nna 0.835  mmd 0.05317  cov 0.2     nna 1  mmd 7.536  cov 0.04333 nna 0.99  mmd 0.1969  cov 0.02667
+   4000nna 0.6033  mmd 0.01711  cov 0.4867   nna 0.71  mmd 0.02372  cov 0.54nna 0.5533  mmd 0.01883  cov 0.4733
+   6000nna 0.545  mmd 0.01682  cov 0.5233nna 0.555  mmd 0.01885  cov 0.5867  nna 0.485  mmd 0.01766  cov 0.56
+   8000    nna 0.5  mmd 0.01611  cov 0.55nna 0.4933  mmd 0.01796  cov 0.5733 nna 0.46  mmd 0.01782  cov 0.5767
+  10000nna 0.4967  mmd 0.01641  cov 0.5767  nna 0.495  mmd 0.01833  cov 0.58 nna 0.4767  mmd 0.01787  cov 0.58
+  12000nna 0.4833  mmd 0.01665  cov 0.5933nna 0.5133  mmd 0.01852  cov 0.5767nna 0.4717  mmd 0.01779  cov 0.5933
+  14000nna 0.475  mmd 0.01662  cov 0.5733nna 0.4883  mmd 0.01828  cov 0.5967 nna 0.4683  mmd 0.01774  cov 0.57
+  16000 nna 0.4583  mmd 0.01658  cov 0.59nna 0.4983  mmd 0.01888  cov 0.5733  nna 0.4583  mmd 0.01729  cov 0.6
+  18000nna 0.435  mmd 0.01641  cov 0.5833nna 0.4983  mmd 0.01855  cov 0.5967    nna 0.46  mmd 0.01736  cov 0.6
+  20000 nna 0.46  mmd 0.01704  cov 0.5867nna 0.4833  mmd 0.01863  cov 0.5733nna 0.455  mmd 0.01732  cov 0.5867
+Charts saved in runs/ptv3_comparison
+Fitting 10 sets of 300 real clouds...
+Generating and fitting pred=x (heun/200, 3 seeds)...
+Generating and fitting pred=eps (heun/200, 3 seeds)...
+Generating and fitting pred=v (heun/200, 3 seeds)...
+
+Real clouds named as the correct shape: 100.0 %
+
+                       triangle % square % circle % distance off outline % covered % clean % size
+real (the limit)             33.3     33.3     33.3  0.00031          0.00     99.67    99.0 0.751
+real chance spread            0.0      0.0      0.0  0.00001          0.00      0.02     0.7 0.007
+x (heun/200)                 27.3     33.7     39.0  0.00758          5.22     99.46    13.0 0.753
+eps (heun/200)               30.3     36.7     33.0  0.01081         10.23     98.77     6.8 0.748
+v (heun/200)                 30.6     33.1     36.3  0.00684          3.28     99.56    30.9 0.750
+
+Saved runs/ptv3_shape_fit.json

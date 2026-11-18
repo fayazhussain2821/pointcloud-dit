@@ -1,8 +1,9 @@
-# Flow Matching with DiT for 2D point clouds
+# Flow Matching with DiT and PointTransformerV3 for 2D point clouds
 
-Part of the DLCV project lab "Back-to-Basics for Point-cloud Generation". A DiT is trained with flow
-matching to generate 2D point clouds of simple shapes, comparing three prediction targets: the clean
-cloud (x), the noise (eps) and the velocity (v). The main score is the Chamfer distance.
+Part of the DLCV project lab "Back-to-Basics for Point-cloud Generation". A DiT and a
+PointTransformerV3 (PTv3) are trained with flow matching to generate 2D point clouds of simple shapes,
+comparing three prediction targets: the clean cloud (x), the noise (eps) and the velocity (v). The main
+score is the Chamfer distance.
 
 ## Dataset (`shapes.py`)
 
@@ -47,6 +48,7 @@ with Euler or Heun steps.
   cannot be told apart (best), 1.0 = always told apart (worst).
 - **MMD-CD:** for every real cloud, the CD to the closest generated cloud, averaged. Lower = better.
 - **COV-CD:** share of real clouds that are the closest match of at least one generated cloud. Higher = more variety.
+- **Nearest CD:** for every generated cloud, the CD to the closest real cloud, averaged. Lower = better.
 - **Shapes:** each generated cloud gets the shape of its closest real cloud. Roughly equal counts = no shape is missing.
 - **Overfitting:** CD from each generated cloud to the closest training cloud, and how many training clouds appear.
 
@@ -56,6 +58,7 @@ with Euler or Heun steps.
 |---|---|
 | `shapes.py` | the toy dataset; `python shapes.py` saves `dataset_examples.png` |
 | `dit.py` | the point-cloud DiT |
+| `ptv3.py` | PointTransformerV3 for 2D point clouds |
 | `flow_matching.py` | mixing with noise, the x/eps/v conversion, the loss, Euler and Heun samplers |
 | `metrics.py` | Chamfer distance, 1-NNA, MMD, COV |
 | `train.py` | trains one prediction type with EMA weights; scores and plots samples at every checkpoint |
@@ -66,6 +69,9 @@ with Euler or Heun steps.
 | `shape_fit.py` | fits a true triangle, square and circle to each cloud: shape shares and outline accuracy |
 | `run_overfit.sh` | sanity check: overfit 3 clouds with x, eps and v |
 | `run_all.sh` | full training with x, eps and v, then evaluation and charts |
+| `check_ptv3.py` | quick checks for the PTv3 model |
+| `run_ptv3_overfit.sh` | sanity check: overfit 3 clouds with PTv3 |
+| `run_ptv3.sh` | full PTv3 training with x, eps and v, then evaluation, charts and shape fit |
 
 ## Running (on the lab machine)
 
@@ -94,47 +100,100 @@ bash run_all.sh 2>&1 | tee run_all.log
 | sampling | Euler, 50 steps | same |
 | scored at each checkpoint | 30 generated clouds vs the 3 training clouds | 300 generated vs 300 held-out clouds |
 
+## PointTransformerV3 (`ptv3.py`)
+
+Trained with `--model ptv3` on the same data, with the same training settings and scores as the DiT.
+
+- **Serialization:** points are sorted along Z-order and Hilbert curves, each also with x and y swapped.
+- **Patch attention:** attention runs inside groups of 64 consecutive points along a curve, and successive
+  blocks use different curves.
+- **U-Net shape:** 4 stages with 256, 128, 64 and 32 points, widths 96, 192, 384 and 384, and skip connections.
+- **Changes from the paper, so that clouds can be batched:** pooling merges neighbouring pairs along the
+  curve instead of grid cells, and the position encoding is a 1D convolution along the curve.
+- **Time conditioning:** adaLN-Zero in every block, as in the DiT.
+
 ## Results
 
-Full training on 10,000 clouds for 20,000 steps per prediction type, one training seed each. Scores use
-the EMA weights and Heun with 200 steps, averaged over 3 noise seeds (300 generated clouds per seed).
+Both models were trained on 10,000 clouds for 20,000 steps per prediction type, with one training seed
+each. Neither model uses class labels. Scores use the EMA weights and Heun with 200 steps, averaged over
+3 noise seeds (300 generated clouds per seed).
 
-![Generated clouds](runs/comparison/final_samples.png)
+### Summary
 
-### Chamfer scores against 300 held-out clouds
+- **DiT with v is the best model overall:** it has the cleanest outlines of all six runs.
+- **v is the best prediction type for both models** on outline accuracy.
+- **PTv3 matches or slightly beats the DiT on the set scores** (1-NNA, MMD), but **its outlines are less
+  clean** for every prediction type.
+- **PTv3 trains about twice as fast:** 100 minutes for all three runs, against 209 minutes for the DiT.
 
-| | 1-NNA | MMD-CD | COV-CD |
-|---|---|---|---|
-| real vs real (`baseline.py`) | 0.473 +- 0.018 | 0.01719 +- 0.00049 | 0.594 +- 0.022 |
-| v | 0.481 | 0.01815 | 0.59 |
-| x | 0.499 | 0.01838 | 0.58 |
-| eps | 0.515 | 0.01944 | 0.58 |
+### DiT and PTv3 compared
+
+Chamfer scores against 300 held-out clouds:
+
+| | 1-NNA | MMD-CD | COV-CD | nearest CD |
+|---|---|---|---|---|
+| real vs real (`baseline.py`) | 0.473 +- 0.018 | 0.01719 +- 0.00049 | 0.594 +- 0.022 | 0.01701 +- 0.00041 |
+| DiT, v | 0.481 | 0.01815 | 0.59 | 0.01788 |
+| PTv3, v | 0.477 | 0.01796 | 0.59 | 0.01755 |
+| DiT, x | 0.499 | 0.01838 | 0.58 | 0.01762 |
+| PTv3, x | 0.483 | 0.01754 | 0.58 | 0.01650 |
+| DiT, eps | 0.515 | 0.01944 | 0.58 | 0.02037 |
+| PTv3, eps | 0.493 | 0.01855 | 0.58 | 0.03374 |
 
 The real-vs-real row is what a perfect generator would get with 300 clouds.
 
-### Shape fit (`shape_fit.py`)
+Shape fit (`shape_fit.py`):
 
 | | triangle / square / circle % | distance to outline | points off outline | clean clouds | outline covered | size |
 |---|---|---|---|---|---|---|
 | real clouds | 33.3 / 33.3 / 33.3 | 0.00031 | 0.00 % | 99.0 % | 99.67 % | 0.751 |
-| v | 30.4 / 35.2 / 34.3 | 0.00515 | 1.49 % | 66.8 % | 99.62 % | 0.750 |
-| eps | 35.1 / 34.3 / 30.6 | 0.00657 | 3.26 % | 43.2 % | 99.54 % | 0.733 |
-| x | 30.0 / 36.2 / 33.8 | 0.00731 | 5.40 % | 37.8 % | 99.23 % | 0.761 |
+| DiT, v | 30.4 / 35.2 / 34.3 | 0.00515 | 1.49 % | 66.8 % | 99.62 % | 0.750 |
+| PTv3, v | 30.6 / 33.1 / 36.3 | 0.00684 | 3.28 % | 30.9 % | 99.56 % | 0.750 |
+| DiT, x | 30.0 / 36.2 / 33.8 | 0.00731 | 5.40 % | 37.8 % | 99.23 % | 0.761 |
+| PTv3, x | 27.3 / 33.7 / 39.0 | 0.00758 | 5.22 % | 13.0 % | 99.46 % | 0.753 |
+| DiT, eps | 35.1 / 34.3 / 30.6 | 0.00657 | 3.26 % | 43.2 % | 99.54 % | 0.733 |
+| PTv3, eps | 30.3 / 36.7 / 33.0 | 0.01081 | 10.23 % | 6.8 % | 98.77 % | 0.748 |
 
 The check names the correct shape for 100 % of real clouds. "Points off outline" are further than 0.02
 from the fitted outline. "Clean clouds" fit as well as 99 % of the real clouds.
 
+Model size and training time (20,000 steps, including the scoring at each checkpoint):
+
+| | parameters | x | eps | v | total |
+|---|---|---|---|---|---|
+| DiT | 32.46M | 69.7 min | 69.8 min | 69.8 min | 209.3 min |
+| PTv3 | 32.54M | 32.4 min | 38.7 min | 29.3 min | 100.4 min |
+
 ### Findings
 
-- All three prediction types generate the three shapes without labels, with variety close to real data.
-- v gives the cleanest outlines, followed by eps and then x.
-- MMD and COV are close to the real-vs-real limit and barely separate the models; the shape fit does.
+- All six runs generate the three shapes without labels, with variety close to real data (COV 0.58 to 0.59).
+- 1-NNA and MMD are close to the real-vs-real limit and barely separate the models; the shape fit does.
+- DiT outlines are cleaner than PTv3 outlines for every prediction type: 66.8 % against 30.9 % clean
+  clouds for v, 37.8 % against 13.0 % for x, and 43.2 % against 6.8 % for eps.
+- The order of the prediction types by clean clouds is v, eps, x for the DiT and v, x, eps for PTv3.
+- PTv3 with eps is the weakest run: 10.23 % of its points are off the outline, and its nearest CD is about
+  twice the real-vs-real value.
 - No model reaches the outline accuracy of real clouds yet.
 - The "Shapes" count in `metrics.py` names the correct shape for only 71 % of real clouds, so use the
   shape fit for shape shares.
-- Each prediction type was trained with one seed, so the order of eps and x is not yet confirmed.
+- Each run used one training seed, so small differences between runs are not confirmed. The reason for the
+  gap in outline accuracy between the DiT and PTv3 has not been tested.
+
+### Generated clouds
+
+DiT:
+
+![DiT generated clouds](runs/comparison/final_samples.png)
+
+PTv3:
+
+![PTv3 generated clouds](runs/ptv3_comparison/final_samples.png)
 
 ### Overfit check
 
-Three clouds, 3,000 steps: nearest CD (EMA) x 0.00033, v 0.00090, eps 0.00478. All 3 training clouds were
-reproduced by every prediction type.
+Three clouds, 3,000 steps. Nearest CD with the EMA weights; all 3 training clouds were reproduced by every run.
+
+| | x | eps | v |
+|---|---|---|---|
+| DiT | 0.00033 | 0.00478 | 0.00090 |
+| PTv3 | 0.00051 | 0.05782 | 0.00081 |
